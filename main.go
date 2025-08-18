@@ -17,7 +17,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// main.go
+// main is the entry point of the application.
+//
+// It loads environment variables, checks for the existence of the "./posts" directory and creates it if necessary.
+// The function parses command line arguments to determine if automatic upload to Instagram is enabled.
+// It generates a post using the ai.GeneratePost function and creates the corresponding images.
+// The user is prompted for Instagram credentials if not provided, and the post is uploaded to Instagram if the user confirms.
+// Finally, it handles any errors that occur during these processes.
 func main() {
 
 	err := godotenv.Load()
@@ -102,6 +108,7 @@ func main() {
 	}
 }
 
+// PromptForUpload prompts the user for confirmation to upload a post to Instagram and returns true if the user agrees.
 func PromptForUpload() bool {
 	fmt.Print("Do you want to upload this post to Instagram? (y/N): ")
 	reader := bufio.NewReader(os.Stdin)
