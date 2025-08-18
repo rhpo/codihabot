@@ -1,0 +1,1 @@
+go build . && GOOS="windows" go build -o instabot.exe . && cp instabot* ~
