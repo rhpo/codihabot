@@ -50,7 +50,9 @@ const AIprompt = `⚠️ VITAL RULE — READ FIRST AND NEVER IGNORE:
 The topic ID is **predefined** and given as: [%s].  
 - It must be treated as exactly **one word, lowercase**.  
 - Do not alter, replace, or invent any other topic.  
-This restriction is vitally important: if the topic differs from [%s], the output is invalid.  
+- The topic ALWAYS comes from the **tech lexicon**.  
+  Example: if the topic is "insomnia", it refers to the **API platform Insomnia**, not the medical condition.  
+This restriction is vitally important: if the topic differs from [%s] or is interpreted outside the tech lexicon, the output is invalid.  
 
 ⚠️ IMPORTANT (CONTENT RULES):  
 - The slides are for Instagram posts.  
