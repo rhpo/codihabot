@@ -13,12 +13,12 @@ var templatesFS embed.FS
 //go:embed resources/*
 var resourcesFS embed.FS
 
-// GetTemplatesFS returns the embedded templates filesystem
+// GetTemplatesFS returns the embedded templates filesystem.
 func GetTemplatesFS() fs.FS {
 	return templatesFS
 }
 
-// GetResourcesFS returns the embedded resources filesystem
+// GetResourcesFS returns the embedded resources filesystem.
 func GetResourcesFS() fs.FS {
 	return resourcesFS
 }

@@ -35,7 +35,7 @@ type searchResult struct {
 var apiKey = os.Getenv("SEARCH_ENGINE_API_KEY")
 var searchEngineID = os.Getenv("SEARCH_ENGINE_ID")
 
-// NewClient creates a new images.Client with your Google API credentials.
+// NewClient creates a new Client with the specified API key and search engine ID.
 func NewClient() *Client {
 	return &Client{
 		APIKey:         apiKey,
@@ -128,6 +128,8 @@ func downloadFixAndEncodeBase64(imgURL string) (string, error) {
 	return dataURI, nil
 }
 
+// hasTransparency checks if the given image has any transparent pixels.
+// It returns true if at least one pixel is transparent, otherwise false.
 func hasTransparency(img image.Image) bool {
 	b := img.Bounds()
 	for y := b.Min.Y; y < b.Max.Y; y++ {
@@ -141,6 +143,9 @@ func hasTransparency(img image.Image) bool {
 	return false
 }
 
+// makeWhiteTransparent removes the white background from an image using the remove.bg API.
+//
+// The function first attempts to encode the provided image to PNG format. If encoding fails, it falls back to a manual method for converting white to transparent. It then constructs a multipart HTTP request to the remove.bg API, including the image data and necessary headers. If the API call is successful, it reads the response and decodes the processed image. In case of any errors during the process, it defaults to the manual conversion method.
 func makeWhiteTransparent(img image.Image) image.Image {
 	// First encode the image to bytes
 	var buf bytes.Buffer
@@ -229,8 +234,9 @@ func makeWhiteTransparentManual(img image.Image) *image.NRGBA {
 	return newImg
 }
 
-// autoCropTransparent automatically crops transparent areas around the image
-// to fit the icon content perfectly into frame
+// autoCropTransparent automatically crops transparent areas around the image to fit the icon content perfectly into frame.
+//
+// It scans the image to determine the bounds of non-transparent content by checking the alpha value of each pixel. If non-transparent content is found, it calculates the minimum and maximum coordinates and applies a padding based on the content size. Finally, it creates and returns a new cropped image that retains the relevant content while removing excess transparent areas. If no content is found, the original image is returned.
 func autoCropTransparent(img image.Image) image.Image {
 	bounds := img.Bounds()
 
@@ -294,7 +300,7 @@ func autoCropTransparent(img image.Image) image.Image {
 	return cropped
 }
 
-// Helper functions for min/max
+// min returns the smaller of two integers.
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -302,6 +308,7 @@ func min(a, b int) int {
 	return b
 }
 
+// max returns the larger of two integers.
 func max(a, b int) int {
 	if a > b {
 		return a
