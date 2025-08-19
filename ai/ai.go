@@ -202,7 +202,7 @@ func GeneratePost(ctx context.Context) (postgen.Post, error) {
 	// assigning images
 
 	// var err error
-	// imageClient := images.NewClient("AIzaSyCncmRuBbNZppNuAXHhv4IWxzhRJAAcpYE", "032e0bd1919414d1c")
+	// imageClient := images.NewClient(os.Getenv("SEARCH_ENGINE_API_KEY"), os.Getenv("SEARCH_ENGINE_ID"))
 	// p.Slides.Hero.Image, err = imageClient.SearchPNGImage(p.Slides.Hero.Image)
 	// p.Slides.Finish.Image = p.Slides.Hero.Image
 	// 	if err != nil {
