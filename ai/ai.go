@@ -141,6 +141,7 @@ JSON rules:
 	return result
 }*/
 
+// FilterTopics returns a slice of strings from A that are not present in B.
 func FilterTopics(A, B []string) []string {
 	// put B into a set (map for fast lookup)
 	setB := make(map[string]struct{})
